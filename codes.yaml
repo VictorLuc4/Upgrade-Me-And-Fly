@@ -1,0 +1,13 @@
+---
+Default:
+  name: Default
+  economy: X
+  business: F
+LH:
+  name: Luftansa
+  economy: E
+  business: C
+# AF:
+#   name: AirFrance
+#   economy:
+#   busniess:
