@@ -20,7 +20,8 @@ class Plane:
         text = fd.read()
         text = text.replace('\t', '')
         text = text.replace('\n', '')
-        text = 'M' + text  # Sometimes the first M is not read so I add it manually
+        if text[0] != 'M':
+            text = 'M' + text  # Sometimes -Always-, the first M is not read so I add it manually
         table = text.split(' ')
         return table
 
