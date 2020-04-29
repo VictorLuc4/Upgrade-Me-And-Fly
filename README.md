@@ -1,6 +1,8 @@
 # UpgradeMe
 
-This programs allows you to generate a boarding pass barcode from an image.
+This programs allows you to generate a boarding pass barcode from an image. 
+
+> DISCLAIMER : Only for educational or some research purpose of course
 
 ## How it works 
 
