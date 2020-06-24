@@ -1,12 +1,14 @@
 import sys
 import os
 import yaml
+import uuid
 
 class Plane:
 
     def __init__(self, filepath):
         self.config_file = './codes.yaml'
-        self.filepath= filepath
+        self.filepath = filepath
+        self.uid = str(uuid.uuid4())
 
     def get_yaml(self):
         with open(self.config_file) as file:
@@ -15,8 +17,9 @@ class Plane:
         return None
 
     def decode_this(self):
-        res = os.system('python2 ./img_to_data/pdf417.py ' + self.filepath  + ' > key.txt')  # not secure but... who cares ? 
-        fd = open('key.txt', 'r')
+        keypath = './static/keys/' + self.uid + '.key'
+        res = os.system('python2 ./img_to_data/pdf417.py ' + self.filepath  + ' > ' + keypath)  # not secure but... who cares ? 
+        fd = open(keypath, 'r')
         text = fd.read()
         text = text.replace('\t', '')
         text = text.replace('\n', '')
@@ -68,8 +71,13 @@ class Plane:
         return business
 
     def create_codebar_from_data(self, business_code_bar):
-        os.system('pdf417gen encode -o ' + os.path.splitext(self.filepath)[0] + '-modified.png ' + '"' + business_code_bar + '"')
+        outpath = './static/modified/' + self.uid + '-modified.png '
+        print('---> outpath : ' + outpath)
+        os.system('pdf417gen encode -o ' + outpath + '"' + business_code_bar + '"')
         return
+    
+    def get_updated_filepath(self):
+        return './static/modified/' + self.uid + '-modified.png '
 
     def fly(self):
         full_codes = self.get_yaml()

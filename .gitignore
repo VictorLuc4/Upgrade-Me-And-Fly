@@ -1,3 +1,6 @@
 *.png
 __pycache__
 key.txt
+static/keys/*
+static/modified/*
+static/uploaded/*

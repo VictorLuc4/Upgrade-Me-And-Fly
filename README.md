@@ -30,3 +30,13 @@ This programs allows you to generate a boarding pass barcode from an image.
 - Allow users to just change their information such as seat number, name etc. 
 - Create an API, to do it remotly by just sending a picture of the boarding pass and getting the updated one directly
 
+## UPDATE et j'ai la flemme de tout changer le readme pour le moment : 
+
+Pour build le container : 
+```bash
+docker build -t victor-fly .
+# puis
+docker run -d victor-fly
+```
+
+Ensuite il faut aller sur `127.0.0.1` ou votre IP, puis que vous selectionnez un fichier avec un code bar. Le serveur genere une nouvelle image et vous la renvoie. 
