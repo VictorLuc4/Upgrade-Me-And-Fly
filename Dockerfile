@@ -3,7 +3,9 @@ FROM python:3
 COPY . /app
 COPY ./requirements.txt /app
 
-EXPOSE 5000
+ENV PORT 8080
+
+EXPOSE $PORT
 
 RUN pip3 install -r /app/requirements.txt
 

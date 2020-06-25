@@ -9,14 +9,16 @@
 #
 
 from plane import Plane
-import sys
+import sys, os
 from flask import Flask, render_template, request
+import pathlib
 
 def secure_filename(name):
    return name.replace(' ', '_')
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/home/victor/Perso/vic/Upgrade-Me-And-Fly/static/uploaded'
+abs_path = str(pathlib.Path(__file__).parent.absolute()) + '/'
+UPLOAD_FOLDER = 'abs_path/static/uploaded'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/toto')
@@ -29,9 +31,10 @@ def uploaded_file():
 	
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
+   print("----->> TEST <<-----")
    if request.method == 'POST':
       f = request.files['file']
-      imagepath = './static/uploaded/' + secure_filename(f.filename)
+      imagepath = abs_path + 'static/uploaded/' + secure_filename(f.filename)
       f.save(imagepath)
       airbus = Plane(imagepath)
       airbus.fly()
@@ -39,4 +42,5 @@ def upload_file():
       return render_template('end.html', picture_name=new_image_path)
 
 if __name__ == '__main__': 
-   app.run(host='0.0.0.0', debug = True) 
+   print("TETEST")
+   app.run(host='0.0.0.0', port=int(os.environ['PORT']), debug = True) 
