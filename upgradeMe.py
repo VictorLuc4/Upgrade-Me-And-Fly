@@ -31,7 +31,6 @@ def uploaded_file():
 	
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
-   print("----->> TEST <<-----")
    if request.method == 'POST':
       f = request.files['file']
       imagepath = abs_path + 'static/uploaded/' + secure_filename(f.filename)
@@ -42,5 +41,4 @@ def upload_file():
       return render_template('end.html', picture_name=new_image_path)
 
 if __name__ == '__main__': 
-   print("TETEST")
    app.run(host='0.0.0.0', port=int(os.environ['PORT']), debug = True) 

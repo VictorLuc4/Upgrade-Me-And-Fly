@@ -7,28 +7,32 @@ import pathlib
 class Plane:
 
     def __init__(self, filepath):
-        self.config_file = './codes.yaml'
+        self.abs_path = str(pathlib.Path(__file__).parent.absolute()) + '/'
+        self.config_file = self.abs_path + 'codes.yaml'
         self.filepath = filepath
         self.uid = str(uuid.uuid4())
-        self.abs_path = str(pathlib.Path(__file__).parent.absolute()) + '/'
 
     def get_yaml(self):
         with open(self.config_file) as file:
-            full_codes = yaml.load(file)      # Get codes from config yaml file
+            full_codes = yaml.load(file)
             return full_codes
         return None
 
     def decode_this(self):
         keypath = self.abs_path + 'static/keys/' + self.uid + '.key'
-        res = os.system('python2 ' + self.abs_path + 'img_to_data/pdf417.py ' + self.filepath  + ' > ' + keypath)  # not secure but... who cares ? 
-        fd = open(keypath, 'r')
-        text = fd.read()
-        text = text.replace('\t', '')
-        text = text.replace('\n', '')
-        if text[0] != 'M':
-            text = 'M' + text  # Sometimes -Always-, the first M is not read so I add it manually
-        table = text.split(' ')
-        return table
+        cmd = 'python2 ' + self.abs_path + 'img_to_data/pdf417.py ' + self.filepath  + ' > ' + keypath
+        res = os.system(cmd)
+        print("cmd = " + cmd + '\nRes = '+ str(res))
+        print("Keypath = " + keypath)
+        with open(keypath) as fd:
+            text = fd.read()
+            text = text.replace('\t', '')
+            text = text.replace('\n', '')
+            print("-----> This is the Text : " + text + " <--- End Text")
+            if text[0] != 'M':
+                text = 'M' + text  # Sometimes -Always-, the first M is not read so I add it manually
+            table = text.split(' ')
+            return table
 
     def get_company(self, code, full_codes):
         op = ''
@@ -79,7 +83,7 @@ class Plane:
         return
     
     def get_updated_filepath(self):
-        return './static/modified/' + self.uid + '-modified.png '
+        return 'modified/' +  self.uid + '-modified.png'
 
     def fly(self):
         full_codes = self.get_yaml()

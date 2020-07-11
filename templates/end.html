@@ -4,6 +4,6 @@
       <title>{{ site_title }}</title>
    </head>
    <body>
-      <img src="{{ picture_name | default('default.jpg')  }}" />  
+      <img src="{{ url_for('static',filename=picture_name) }}" />  
    </body>
 </html>

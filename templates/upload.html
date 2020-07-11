@@ -4,9 +4,10 @@
       <title>{{ site_title }}</title>
    </head>
    <body>
-      <form action = "http://localhost:8080/uploader" method = "POST" 
+       <form class="fileUpload" action = "https://testflynsn9mwolyl-testfly.functions.fnc.fr-par.scw.cloud/uploader" method = "POST"  enctype = "multipart/form-data"> 
+      <!--<form class="fileUpload" action = "http://0.0.0.0:8080/uploader" method = "POST" -->
          enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
+         <input type = "file" name = "file" class="fileElem"/>
          <input type = "submit"/>
       </form>   
    </body>

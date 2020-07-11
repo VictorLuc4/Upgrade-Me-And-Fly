@@ -1,2 +1,3 @@
 flask
 pyyaml
+pdf417gen
