@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #
-# Ce programme analyse une image integrant un code barre 
+# This program analyse an image containing a barcode
 # au format pdf417, lit les donnees puis modifie la classe 
 # de de economie vers business, puis regenere un code barre.
 #
@@ -22,7 +22,7 @@ UPLOAD_FOLDER = 'abs_path/static/uploaded'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/toto')
-def root_index():
+def toto_index():
    return "Hello World"
 
 @app.route('/')
